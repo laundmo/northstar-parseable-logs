@@ -3,7 +3,7 @@
 	"Description": "Parse-able JSON log of ingame events.",
 	"LoadPriority": 1,
 	"RequiredOnClient": false,
-	"Version": "1.0.0",
+	"Version": "0.0.1",
     "ConVars": [
         {
 			"Name": "parsable_player_interval",

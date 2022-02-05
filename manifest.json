@@ -1,9 +1,7 @@
 {
-    "name": "ExampleMod",
+    "name": "ParseableLog",
     "version_number": "0.0.1",
-    "website_url": "https://github.com/laundmo/northstar-mod-template",
-    "description": "Example mod",
-    "dependencies": [
-        "Username-Modname-1.5.0"
-    ]
+    "website_url": "https://github.com/laundmo/northstar-parseable-logs",
+    "description": "Parse-able JSON log of ingame events.",
+    "dependencies": []
 }
