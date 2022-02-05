@@ -1,0 +1,22 @@
+{
+	"Name": "laundmo.ParseableLog",
+	"Description": "Parse-able JSON log of ingame events.",
+	"LoadPriority": 1,
+	"RequiredOnClient": false,
+	"Version": "1.0.0",
+    "ConVars": [
+        {
+			"Name": "parsable_player_interval",
+			"DefaultValue": "0"
+		}
+	],
+	"Scripts": [
+		{
+			"Path": "laundmo_parseable_logs.nut",
+			"RunOn": "SERVER",
+			"ServerCallback": {
+				"After": "serverLog"
+			}		
+		}
+	]
+}

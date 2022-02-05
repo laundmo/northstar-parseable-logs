@@ -1,11 +1,29 @@
-# northstar-mod-template
-Northstar mod template
+# Northstar server Parseable Logs
 
-# READ!
+This mod adds a bunch of logs to Northstar servers. The logs output in JSON format, to allow for easily parsing them with external tools.
 
-Please change the folder name of Template.Mod to your mods name.
+## Log format
 
-Please modify the manifest.json and mod.json and change everything to your mods needs.
-Make sure the version between them both is the same.
+A log line might look like this:
 
-There is a empty example Squirrel script in mods/Example.Mod/mod/scripts/vscripts/. You likely want to rename and modify or replace that file.
+```
+[20:42:14] [info] [SERVER SCRIPT] [ParseableLog]{"subject":{"type":"player","name":"laundmo","playerIndex":0,"teamId":3,"uid":"1006865660022","ping":196685,"kills":0,"deaths":0,"alive":false},"verb":"existing"}
+```
+
+The logs take a subject-verb or subject-verb-object structure. The subject is any thing which happens to do something, the verb is what it does, and the object what it does it to.
+
+In the example line, i had set the `parsable_player_interval` convar to `10`, meaning every player is logged with the verb `existing` every 10 seconds. Without this, logs only happen when certain events happen.
+
+Currently logged events:
+
+- client connecting
+- client connected
+- client disconnected
+- player respawned
+- player killed
+- round ended
+- game state changed
+
+## Config
+
+This mod defines one config variable, `parsable_player_interval` in seconds. Its used to periodically log all players. default `0` (disabled)
