@@ -2,6 +2,12 @@
 
 This mod adds a bunch of logs to Northstar servers. The logs output in JSON format, to allow for easily parsing them with external tools.
 
+## companion python library
+
+I made a companion python library that parses these logs and provides callbacks for handling events logged by this mod:
+
+Check it out here: https://github.com/laundmo/northstar-parseable-logs-lib
+
 ## Log format
 
 A log line might look like this:
