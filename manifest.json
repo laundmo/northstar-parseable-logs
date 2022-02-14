@@ -1,7 +1,7 @@
 {
-    "name": "ParseableLog",
-    "version_number": "0.0.1",
+    "name": "ParseableLogs",
+    "version_number": "0.1.3",
     "website_url": "https://github.com/laundmo/northstar-parseable-logs",
-    "description": "Parse-able JSON log of ingame events.",
+    "description": "Parseable JSON log of ingame events.",
     "dependencies": []
 }

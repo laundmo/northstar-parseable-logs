@@ -15,14 +15,14 @@ void function serverLog(){
     AddCallback_OnRoundEndCleanup(roundEnded)
 
     // Gamestate logs
-    AddCallback_GameStateEnter( eGameState.WaitingForPlayers, gs_waitingForPlayers )
-    AddCallback_GameStateEnter( eGameState.PickLoadout, gs_pickingLoadouts )
-    AddCallback_GameStateEnter( eGameState.Prematch, gs_prematch )
-    AddCallback_GameStateEnter( eGameState.Playing, gs_playing )
-    AddCallback_GameStateEnter( eGameState.WinnerDetermined, gs_winnerDetermined )
-    AddCallback_GameStateEnter( eGameState.SwitchingSides, gs_switchingSides )
-    AddCallback_GameStateEnter( eGameState.SuddenDeath, gs_suddenDeath )
-    AddCallback_GameStateEnter( eGameState.Postmatch, gs_postmatch )
+	AddCallback_GameStateEnter( eGameState.WaitingForPlayers, gs_waitingForPlayers )
+	AddCallback_GameStateEnter( eGameState.PickLoadout, gs_pickingLoadouts )
+	AddCallback_GameStateEnter( eGameState.Prematch, gs_prematch )
+	AddCallback_GameStateEnter( eGameState.Playing, gs_playing )
+	AddCallback_GameStateEnter( eGameState.WinnerDetermined, gs_winnerDetermined )
+	AddCallback_GameStateEnter( eGameState.SwitchingSides, gs_switchingSides )
+	AddCallback_GameStateEnter( eGameState.SuddenDeath, gs_suddenDeath )
+	AddCallback_GameStateEnter( eGameState.Postmatch, gs_postmatch )
 
     int playerLocationInterval = GetConVarInt("parsable_player_interval")
     if (playerLocationInterval > 0){
@@ -155,23 +155,41 @@ void function playerLogThread(int interval) {
 }
 
 void function playerKilled( entity victim, entity attacker, var damageInfo ){
-    log_svo(fmtPlayer(attacker), fmtString("killed"), fmtPlayer(victim))
+    switch(attacker.GetClassName()){
+        case"trigger_hurt": // Fall
+            log_svo(fmtPlayer(victim), fmtString("diedfrom"), fmtString("fall"))
+            return
+        case"worldspawn": // Out of Bounds
+            log_svo(fmtPlayer(victim), fmtString("diedfrom"), fmtString("out of bounds"))
+            return
+        case"player":
+            log_svo(fmtPlayer(attacker), fmtString("killed"), fmtPlayer(victim))
+            return
+    }
 }
 
 void function playerRespawned( entity client ){
-    log_sv(fmtPlayer(client), fmtString("respawned"))
+    if (client.IsPlayer()) {
+        log_sv(fmtPlayer(client), fmtString("respawned"))
+    }
 }
 
 void function clientConnecting( entity client ){
-    log_sv(fmtPlayer(client), fmtString("connecting"))
+    if (client.IsPlayer()){
+        log_sv(fmtPlayer(client), fmtString("connecting"))
+    }
 }
 
 void function clientConnected( entity client ){
-    log_sv(fmtPlayer(client), fmtString("connected"))
+    if (client.IsPlayer()){
+        log_sv(fmtPlayer(client), fmtString("connected"))
+    }
 }
 
 void function clientDisconnected( entity client ){
-    log_sv(fmtPlayer(client), fmtString("disconnected"))
+    if (client.IsPlayer()){
+        log_sv(fmtPlayer(client), fmtString("disconnected"))
+    }
 }
 
 void function gs_waitingForPlayers(){
